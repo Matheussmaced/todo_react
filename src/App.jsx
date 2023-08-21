@@ -1,10 +1,15 @@
-import './App.css'
-import { useState } from 'react'
+import './App.css';
+import { useState } from 'react';
+import {MdDelete} from 'react-icons/md';
 
 function App() {
-
+  const [todos, setTodos] = useState([]); // valor inicial
   const [value, setValue] = useState('');
+
+  const [removeTodo, setRemoveTodo] = useState('classInicial');
   
+  console.log(todos.title)
+
   const eventChange = (event) => {
     return setValue(event.target.value);
   }
@@ -14,6 +19,10 @@ function App() {
   }
   const submit = () =>{
     console.log(value);
+
+    setTodos([...todos,{id: new Date().getTime(), title: value, checked: false}])
+    
+
   }
 
   const enterKey = 13;
@@ -22,7 +31,8 @@ function App() {
 
   const pressEnterAndEsc = (event) => {
      if (event.which === enterKey){
-      return submit()
+      submit()
+      erase()
     } else if (event.which === scapeKey){
       return erase();
     }
@@ -41,7 +51,21 @@ function App() {
         value={value}
         onChange={eventChange}
         onKeyDown={pressEnterAndEsc}/>
+
+        <ul className='todo-list'>
+            { todos.map(todo=>(
+              <li className={removeTodo} key={todo.id.toString()}>
+                <div id="box">
+                  <span>{todo.title}</span>
+                  <button className='remove'>
+                    <MdDelete size={20}/>
+                  </button>
+                </div>
+              </li>
+            ))}
+        </ul>
       </section>
+
     </section>
   )
 }

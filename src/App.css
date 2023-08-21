@@ -16,3 +16,24 @@
   padding: 16px 16px 18px 16px;
   color: black;
 }
+
+.todo-list{
+  margin: 0;
+  padding: 0 5px 10px 5px;
+}
+ul{
+  text-align: justify;
+}
+li{
+  padding: 10px 0 10px 20px;
+  border: solid rgb(220, 220, 220) 1px;
+  border-radius: 5px;
+}
+
+#box{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: 20px;
+}
+
