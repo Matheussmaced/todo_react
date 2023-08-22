@@ -7,8 +7,6 @@ function App() {
   const [value, setValue] = useState('');
 
   const [removeTodo, setRemoveTodo] = useState('classInicial');
-  
-  console.log(todos.title)
 
   const eventChange = (event) => {
     return setValue(event.target.value);
@@ -18,11 +16,7 @@ function App() {
     return setValue('');
   }
   const submit = () =>{
-    console.log(value);
-
     setTodos([...todos,{id: new Date().getTime(), title: value, checked: false}])
-    
-
   }
 
   const enterKey = 13;
@@ -37,6 +31,15 @@ function App() {
       return erase();
     }
   }
+
+  const checked = (todo) => {
+    setTodos(todos.map((obj)=>(
+      obj.id === todo.id ? {...obj, checked: true}
+      : obj
+    )))
+    console.log(todos)
+  }
+    
 
   return (
     <section id='app' className='container'>
@@ -56,7 +59,7 @@ function App() {
             { todos.map(todo=>(
               <li className={removeTodo} key={todo.id.toString()}>
                 <div id="box">
-                  <span>{todo.title}</span>
+                  <span onClick={() => checked(todos)}>{todo.title}</span>
                   <button className='remove'>
                     <MdDelete size={20}/>
                   </button>

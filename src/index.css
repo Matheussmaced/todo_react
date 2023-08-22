@@ -115,3 +115,8 @@ li{
   box-shadow: .5px .5px 1px rgb(172, 172, 172);
 }
 
+.checked{
+  text-decoration: line-through;
+  font-style: italic;
+}
+
