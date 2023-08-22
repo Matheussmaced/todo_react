@@ -6,8 +6,6 @@ function App() {
   const [todos, setTodos] = useState([]); // valor inicial
   const [value, setValue] = useState('');
 
-  const [removeTodo, setRemoveTodo] = useState('classInicial');
-
   const eventChange = (event) => {
     return setValue(event.target.value);
   }
@@ -43,10 +41,15 @@ function App() {
       todos.map((obj) => (
         obj.id === todo.id ? {...obj,checked: !obj.checked}
         : obj
-      ))
-      )
-      console.log(todo)
+      )))
   }
+
+  const remove = (todo) => {
+    console.log('remove', todo)
+    setTodos(todos.filter((obj) => obj.id !== todo.id)); // para não retornar o todo desejado
+  }
+
+
   return (
     <section id='app' className='container'>
       <header>
@@ -63,13 +66,15 @@ function App() {
 
         <ul className='todo-list'>
             { todos.map(todo=>(
-              <li className={removeTodo} key={todo.id.toString()}>
+              <li key={todo.id.toString()}>
                 <div id="box">
                   <span onClick={() => onToggle(todo)}
                   className={todo.checked ? 'checked' : ''}
                   >
                     {todo.title}</span>
-                  <button className='remove'>
+                  <button className='remove'
+                  onClick={() => remove(todo)}
+                  >
                     <MdDelete size={20}/>
                   </button>
                 </div>
