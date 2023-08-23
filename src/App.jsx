@@ -1,7 +1,8 @@
-import './App.css';
 import { useState } from 'react';
-import {MdDelete} from 'react-icons/md';
+
+import './App.css';
 import NewTodo from './components/NewTodo/NewTodo'
+import TodoList from './components/TodoList/TodoList'
 
 function App() {
   const [todos, setTodos] = useState([]); // valor inicial
@@ -27,7 +28,6 @@ function App() {
     setTodos(todos.filter((obj) => obj.id !== todo.id)); // para não retornar o todo desejado
   }
 
-
   return (
     <section id='app' className='container'>
       <header>
@@ -35,24 +35,7 @@ function App() {
       </header>
       <section className='main'>
         <NewTodo onNewTodo={onNewTodo} />
-
-        <ul className='todo-list'>
-            { todos.map(todo=>(
-              <li key={todo.id.toString()}>
-                <div id="box">
-                  <span onClick={() => onToggle(todo)}
-                  className={todo.checked ? 'checked' : ''}
-                  >
-                    {todo.title}</span>
-                  <button className='remove'
-                  onClick={() => remove(todo)}
-                  >
-                    <MdDelete size={20}/>
-                  </button>
-                </div>
-              </li>
-            ))}
-        </ul>
+        <TodoList todos={todos} onToggle={onToggle} remove={remove} />
       </section>
 
     </section>
